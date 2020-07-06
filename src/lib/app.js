@@ -1,4 +1,4 @@
-const APIBOX = require('./apibox')
+const Apibox = require('./apibox')
 const Pointer = require('./pointer')
 const Relation = require('./relation')
 const Query = require('./query')
@@ -28,68 +28,68 @@ const {
 } = require('./sms')
 
 // 生成二维码
-APIBOX.GeoPoint = geoPoint
+Apibox.GeoPoint = geoPoint
 // 生成二维码
-APIBOX.generateCode = generateCode
+Apibox.generateCode = generateCode
 // 获取微信token
-APIBOX.getAccessToken = getAccessToken
+Apibox.getAccessToken = getAccessToken
 // 小程序模版信息
-APIBOX.sendWeAppMessage = sendWeAppMessage
+Apibox.sendWeAppMessage = sendWeAppMessage
 // 微信退款
-APIBOX.refund = refund
+Apibox.refund = refund
 // 检测文本
-APIBOX.checkMsg = checkMsg
+Apibox.checkMsg = checkMsg
 // 微信主动通知
-APIBOX.notifyMsg = notifyMsg
+Apibox.notifyMsg = notifyMsg
 // 请求短信验证码
-APIBOX.requestSmsCode = requestSmsCode
+Apibox.requestSmsCode = requestSmsCode
 // 验证短信验证码
-APIBOX.verifySmsCode = verifySmsCode
+Apibox.verifySmsCode = verifySmsCode
 // 云函数
-APIBOX.run = APIBOX.functions = functions
+Apibox.run = Apibox.functions = functions
 // 获取服务器时间
-APIBOX.timestamp = timestamp
+Apibox.timestamp = timestamp
 // 密码重置(Email)
-APIBOX.requestPasswordReset = requestPasswordReset
+Apibox.requestPasswordReset = requestPasswordReset
 // 密码重置(短信)
-APIBOX.resetPasswordBySmsCode = resetPasswordBySmsCode
+Apibox.resetPasswordBySmsCode = resetPasswordBySmsCode
 // 密码重置(登录状态下更改密码)
-APIBOX.updateUserPassword = updateUserPassword
+Apibox.updateUserPassword = updateUserPassword
 // APP推送
-APIBOX.push = push
+Apibox.push = push
 // 小程序支付
-APIBOX.Pay = new Pay()
+Apibox.Pay = new Pay()
 // 用户对象
-APIBOX.User = new User()
+Apibox.User = new User()
 // 通讯
-APIBOX.Socket = (id) => new Socket(id)
+Apibox.Socket = (id) => new Socket(id)
 // 数据操作
-APIBOX.Query = parmas => new Query(parmas)
+Apibox.Query = parmas => new Query(parmas)
 // 文件操作
-APIBOX.File = (name, object) => new File(name, object)
+Apibox.File = (name, object) => new File(name, object)
 // 网络请求
-APIBOX.request = require('./request')
+Apibox.request = require('./request')
 // 平台判断
-APIBOX.type = APIBOX.utils.getAppType()
+Apibox.type = Apibox.utils.getAppType()
 // 数据关联(一对一)
-APIBOX.Pointer = parmas => new Pointer(parmas)
+Apibox.Pointer = parmas => new Pointer(parmas)
 // 数据关联(一对多，多对多)
-APIBOX.Relation = parmas => new Relation(parmas)
+Apibox.Relation = parmas => new Relation(parmas)
 
-if (APIBOX.type === 'wx') {
+if (Apibox.type === 'wx') {
   if (typeof (tt) !== 'undefined') {
-    tt.APIBOX = APIBOX
+    tt.Apibox = Apibox
   } else {
-    wx.APIBOX = APIBOX
+    wx.Apibox = Apibox
   }
-} else if (APIBOX.type === 'h5') {
-  window.APIBOX = APIBOX
-} else if (APIBOX.type === 'hap') {
+} else if (Apibox.type === 'h5') {
+  window.Apibox = Apibox
+} else if (Apibox.type === 'hap') {
   // 快应用功能
-  global.APIBOX = APIBOX
-} else if (APIBOX.type === 'nodejs') {
+  global.Apibox = Apibox
+} else if (Apibox.type === 'nodejs') {
   // nodejs
-  global.APIBOX = APIBOX
+  global.Apibox = Apibox
 }
 
-module.exports = APIBOX
+module.exports = Apibox

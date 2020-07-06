@@ -2,7 +2,7 @@ const packageInfo = require('../package.json')
 const fs = require('fs')
 const path = require('path')
 
-const BmobFile = path.join(__dirname, '../dist/APIBOX-' + packageInfo.version + '.min.js')
+const BmobFile = path.join(__dirname, '../dist/apibox-' + packageInfo.version + '.min.js')
 
 function HapAmendAsyncPlugin(options) {}
 
@@ -14,14 +14,14 @@ HapAmendAsyncPlugin.prototype.apply = function (compiler) {
       const auth = `
 /* !
 * hydrogen-js-sdk
-* APIBOX.min.js v${packageInfo.version}
+* apibox.min.js v${packageInfo.version}
 * updated date ${time}
 */
 `
       const data = auth + result.replace("xxrequire('@system.fetch')xx", "require('@system.fetch')")
 
       fs.writeFile(BmobFile, data, function (error) {
-        console.log('APIBOX-' + packageInfo.version + '.min.js  Compile successfully')
+        console.log('apibox-' + packageInfo.version + '.min.js  Compile successfully')
       })
     })
   });

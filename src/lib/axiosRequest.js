@@ -8,32 +8,32 @@
  */
 /* eslint-disable */
 const axios = require('./axios/lib/axios')
-let APIBOX = require('./apibox')
+let Apibox = require('./apibox')
 let md5 = require('./utf8md5')
 
 const setHeader = (config, route, method, parma) => {
   let type = 'wxlite'
-  if (APIBOX.type === 'nodejs') {
+  if (Apibox.type === 'nodejs') {
     type = 'nodejs'
   }
   const t = Math.round(new Date().getTime() / 1000);
 
   let body = (method === 'get' || method === 'delete') ? '' : JSON.stringify(parma)
 
-  const rand = APIBOX.utils.randomString()
+  const rand = Apibox.utils.randomString()
   const sign = md5.utf8MD5(route + t + config.securityCode + rand + body + config.serverVersion)
   let header = {
     'content-type': 'application/json',
-    'X-APIBOX-SDK-Type': type,
-    'X-APIBOX-Safe-Sign': sign,
-    'X-APIBOX-Safe-Timestamp': t,
-    'X-APIBOX-Noncestr-Key': rand,
-    'X-APIBOX-SDK-Version': config.serverVersion,
-    'X-APIBOX-Secret-Key': config.secretKey
+    'X-Apibox-SDK-Type': type,
+    'X-Apibox-Safe-Sign': sign,
+    'X-Apibox-Safe-Timestamp': t,
+    'X-Apibox-Noncestr-Key': rand,
+    'X-Apibox-SDK-Version': config.serverVersion,
+    'X-Apibox-Secret-Key': config.secretKey
   }
 
   if (config.applicationMasterKey) {
-    header['X-APIBOX-Master-Key'] = config.applicationMasterKey
+    header['X-Apibox-Master-Key'] = config.applicationMasterKey
   }
 
   return header
@@ -41,18 +41,18 @@ const setHeader = (config, route, method, parma) => {
 
 const request = (route, method = 'get', parma = {}) => {
   return new Promise((resolve, reject) => {
-    if (undefined === APIBOX.User) {
-      APIBOX = require('./apibox')
+    if (undefined === Apibox.User) {
+      Apibox = require('./apibox')
     }
 
-    const header = setHeader(APIBOX._config, route, method, parma)
+    const header = setHeader(Apibox._config, route, method, parma)
 
-    var current = APIBOX.User.current()
+    var current = Apibox.User.current()
     if (current) {
-      header['X-APIBOX-Session-Token'] = current.sessionToken
+      header['X-Apibox-Session-Token'] = current.sessionToken
     }
     const server = axios.create({
-      baseURL: APIBOX._config.host,
+      baseURL: Apibox._config.host,
       headers: header,
       validateStatus: (status) => {
         return status < 500 // 状态码在大于或等于500时才会 reject
@@ -67,8 +67,8 @@ const request = (route, method = 'get', parma = {}) => {
     } else {
       serverData.data = parma
     }
-    if (APIBOX._config.deBug === true) {
-      console.log('host:', APIBOX._config.host)
+    if (Apibox._config.deBug === true) {
+      console.log('host:', Apibox._config.host)
       console.log('parma:', parma)
     }
     server(serverData).then(({

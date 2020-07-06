@@ -4,9 +4,9 @@
  * @LastEditTime: 2020-06-17 18:26:23
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /bmob-js-sdk-es6/src/lib/wxRequest.js
+ * @FilePath: /apibox-js-sdk-es6/src/lib/wxRequest.js
  */
-let APIBOX = require('./apibox')
+let Apibox = require('./apibox')
 let md5 = require('./utf8md5')
 let sdkType = 'wxlite'
 if (typeof (tt) !== 'undefined') {
@@ -17,43 +17,43 @@ if (typeof (tt) !== 'undefined') {
 
 const setHeader = (config, route, method, parma) => {
   const t = Math.round(new Date().getTime() / 1000)
-  const rand = APIBOX.utils.randomString()
+  const rand = Apibox.utils.randomString()
   let body = (method === 'get' || method === 'delete') ? '' : JSON.stringify(parma)
 
   const sign = md5.utf8MD5(route + t + config.securityCode + rand + body + config.serverVersion)
   // const sign = md5.utf8MD5(route + t + config.securityCode + rand)
   let header = {
     'content-type': 'application/json',
-    'X-APIBOX-SDK-Type': sdkType,
-    'X-APIBOX-Safe-Sign': sign,
-    'X-APIBOX-Safe-Timestamp': t,
-    'X-APIBOX-Noncestr-Key': rand,
-    'X-APIBOX-SDK-Version': config.serverVersion,
-    'X-APIBOX-Secret-Key': config.secretKey
+    'X-Apibox-SDK-Type': sdkType,
+    'X-Apibox-Safe-Sign': sign,
+    'X-Apibox-Safe-Timestamp': t,
+    'X-Apibox-Noncestr-Key': rand,
+    'X-Apibox-SDK-Version': config.serverVersion,
+    'X-Apibox-Secret-Key': config.secretKey
   }
   if (config.applicationMasterKey) {
-    header['X-APIBOX-Master-Key'] = config.applicationMasterKey
+    header['X-Apibox-Master-Key'] = config.applicationMasterKey
   }
   return header
 }
 
 const request = (route, method = 'get', parma = {}) => {
   return new Promise((resolve, reject) => {
-    const header = setHeader(APIBOX._config, route, method, parma)
+    const header = setHeader(Apibox._config, route, method, parma)
 
-    if (undefined === APIBOX.User) {
-      APIBOX = require('./apibox')
+    if (undefined === Apibox.User) {
+      Apibox = require('./apibox')
     }
-    let current = APIBOX.User.current()
+    let current = Apibox.User.current()
     if (current) {
-      header['X-APIBOX-Session-Token'] = current.sessionToken
+      header['X-Apibox-Session-Token'] = current.sessionToken
     }
-    if (APIBOX._config.deBug === true) {
-      console.log('host:', APIBOX._config.host)
+    if (Apibox._config.deBug === true) {
+      console.log('host:', Apibox._config.host)
       console.log('parma:', parma)
     }
     wx.request({
-      url: APIBOX._config.host + route,
+      url: Apibox._config.host + route,
       method: method,
       data: parma,
       header: header,

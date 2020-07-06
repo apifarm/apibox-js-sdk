@@ -2,7 +2,7 @@ class error {
   constructor(code, msg) {
     let error = new Error()
     error.code = code
-    error.message = msg ? `APIBOX.Error:{code:${code}, message:${msg}}` : `APIBOX.Error:{code:${code}, message:${this.errorMsg(code)}}`
+    error.message = msg ? `Apibox.Error:{code:${code}, message:${msg}}` : `Apibox.Error:{code:${code}, message:${this.errorMsg(code)}}`
 
     return error
   }
@@ -22,7 +22,7 @@ class error {
         return 'Log in failure.'
       case 419:
         // 内容为空
-        return 'APIBOX.GeoPoint location error.'
+        return 'Apibox.GeoPoint location error.'
       default:
         return 'unknown error'
     }

@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-06-17 18:26:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /bmob-js-sdk-es6/src/lib/utils.js
+ * @FilePath: /apibox-js-sdk-es6/src/lib/utils.js
  */
 let config
 
@@ -58,4 +58,8 @@ const randomString = () => {
   }
   return nums
 }
-module.exports = { randomString, getConfig, getAppType }
+module.exports = {
+  randomString,
+  getConfig,
+  getAppType
+}

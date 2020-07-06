@@ -1,5 +1,5 @@
 const request = require('./request')
-const APIBOX = require('./apibox')
+const Apibox = require('./apibox')
 const Error = require('./error')
 const {
   isObject,
@@ -17,7 +17,7 @@ const generateCode = (data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = APIBOX._config.parameters.GENERATECODE
+  let route = Apibox._config.parameters.GENERATECODE
   return request(route, 'post', data)
 }
 
@@ -26,7 +26,7 @@ const generateCode = (data) => {
  * @return {Object}
  */
 const getAccessToken = () => {
-  let route = APIBOX._config.parameters.GETACCESSTOKEN
+  let route = Apibox._config.parameters.GETACCESSTOKEN
   return request(route, 'get')
 }
 
@@ -39,7 +39,7 @@ const sendWeAppMessage = (data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = APIBOX._config.parameters.SENDWEAPPMESSAGE
+  let route = Apibox._config.parameters.SENDWEAPPMESSAGE
   return request(route, 'post', data)
 }
 
@@ -57,7 +57,7 @@ const refund = (data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = APIBOX._config.parameters.REFUND
+  let route = Apibox._config.parameters.REFUND
   return request(route, 'post', data)
 }
 
@@ -70,7 +70,7 @@ const notifyMsg = (data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = APIBOX._config.parameters.NOTIFYMSG
+  let route = Apibox._config.parameters.NOTIFYMSG
   return request(route, 'post', data)
 }
 
@@ -87,7 +87,7 @@ const requestPasswordReset = (data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = APIBOX._config.parameters.REQUESTPASSWORDRESET
+  let route = Apibox._config.parameters.REQUESTPASSWORDRESET
   return request(route, 'post', data)
 }
 
@@ -97,7 +97,7 @@ const resetPasswordBySmsCode = (smsCode, data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = `${APIBOX._config.parameters.RESETPASSWORDBYSMSCODE}/${smsCode}`
+  let route = `${Apibox._config.parameters.RESETPASSWORDBYSMSCODE}/${smsCode}`
   return request(route, 'put', data)
 }
 
@@ -107,7 +107,7 @@ const updateUserPassword = (objectId, data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = `${APIBOX._config.parameters.UPDATEUSERPASSWORD}/${objectId}`
+  let route = `${Apibox._config.parameters.UPDATEUSERPASSWORD}/${objectId}`
   return request(route, 'put', data)
 }
 
@@ -117,7 +117,7 @@ const checkMsg = (content) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = `${APIBOX._config.parameters.CHECK_MSG}`
+  let route = `${Apibox._config.parameters.CHECK_MSG}`
   const data = {
     'content': content
   }
@@ -130,7 +130,7 @@ const checkMsg = (content) => {
  */
 
 const timestamp = () => {
-  let route = APIBOX._config.parameters.TIMESTAMP
+  let route = Apibox._config.parameters.TIMESTAMP
   return request(route, 'get')
 }
 
@@ -143,7 +143,7 @@ const push = (data) => {
     // 参数异常
     throw new Error(415)
   }
-  let route = APIBOX._config.parameters.PUSH
+  let route = Apibox._config.parameters.PUSH
   return request(route, 'post', data)
 }
 
@@ -161,7 +161,7 @@ const functions = (funName, data) => {
     // 参数异常
     throw new Error(415)
   }
-  const route = `${APIBOX._config.parameters.FUNCTIONS}/${funName}`
+  const route = `${Apibox._config.parameters.FUNCTIONS}/${funName}`
   return new Promise((resolve, reject) => {
     request(route, 'post', data)
       .then(({

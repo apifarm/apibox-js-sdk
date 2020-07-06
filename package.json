@@ -1,7 +1,7 @@
 {
   "name": "hydrogen-js-sdk",
   "version": "2.2.5",
-  "description": "APIBOX SDK",
+  "description": "Apibox SDK",
   "main": "./index.js",
   "typings": "./index.d.ts",
   "scripts": {
@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bmob/hydrogen-js-sdk.git"
+    "url": "git+https://github.com/apifarm/apibox-js-sdk.git"
   },
-  "author": "APIBOX",
+  "author": "apibox",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bmob/hydrogen-js-sdk/issues"
+    "url": "https://github.com/apifarm/apibox-js-sdk/issues"
   },
-  "homepage": "https://github.com/bmob/hydrogen-js-sdk#readme",
+  "homepage": "https://github.com/apifarm/apibox-js-sdk#readme",
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "node.extend": "^2.0.0",
@@ -47,6 +47,6 @@
     "doc": "docs"
   },
   "keywords": [
-    "APIBOX"
+    "Apibox"
   ]
 }

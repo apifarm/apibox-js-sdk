@@ -4,7 +4,7 @@
  * @LastEditTime: 2020-03-11 16:22:04
  * @LastEditors: your name
  * @Description: In User Settings Edit
- * @FilePath: /bmob-js-sdk-es6/src/lib/config.js
+ * @FilePath: /apibox-js-sdk-es6/src/lib/config.js
  */
 let ROOT
 let VERSION

@@ -9,23 +9,24 @@ module.exports = {
   entry: './src/main.js',
   output: {
     path: config.staticPath,
-    filename: 'APIBOX-' + packageInfo.version + '.min.js',
-    library: 'APIBOX',
+    filename: 'apibox-' + packageInfo.version + '.min.js',
+    library: 'apibox',
     libraryTarget: "umd"
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: "eslint-loader",
-        options: {}
-      }
-    ]
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: "eslint-loader",
+      options: {}
+    }]
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({filename: 'index.html', template: 'src/index.html'})
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/index.html'
+    })
   ],
   devServer: {
     contentBase: config.staticPath,

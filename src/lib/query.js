@@ -1,4 +1,4 @@
-let APIBOX = require('./apibox')
+let Apibox = require('./apibox')
 const request = require('./request')
 const {
   isObject,
@@ -11,7 +11,7 @@ const Error = require('./error')
 const storage = require('./storage')
 const query = class query {
   constructor(parmas) {
-    this.tableName = `${APIBOX._config.parameters.QUERY}/${parmas}`
+    this.tableName = `${Apibox._config.parameters.QUERY}/${parmas}`
     this.className = parmas
     this.init()
     this.addArray = {}
@@ -211,7 +211,7 @@ const query = class query {
     }
   }
   current() {
-    if (APIBOX.type !== 'hap') {
+    if (Apibox.type !== 'hap') {
       const data = storage.fetch('apibox')
       return typeof data === 'object' ? data : JSON.parse(data)
     } else {
@@ -308,7 +308,7 @@ const query = class query {
     let params = {
       requests: key
     }
-    let route = APIBOX._config.parameters.BATCH
+    let route = Apibox._config.parameters.BATCH
     // 批量操作
     return request(route, 'POST', params)
   }
@@ -638,7 +638,7 @@ const query = class query {
         requests: key
       }
       // 批量操作
-      let route = APIBOX._config.parameters.BATCH
+      let route = Apibox._config.parameters.BATCH
       return request(route, 'POST', params)
     }
     return new Promise((resolve, reject) => {

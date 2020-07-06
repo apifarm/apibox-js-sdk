@@ -9,8 +9,8 @@ module.exports = {
   entry: './src/lib/app.js',
   output: {
     path: config.staticPath,
-    filename: 'APIBOX-' + packageInfo.version + '.min.js',
-    library: 'APIBOX',
+    filename: 'apibox-' + packageInfo.version + '.min.js',
+    library: 'apibox',
     libraryTarget: 'umd'
   },
   module: {

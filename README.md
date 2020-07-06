@@ -1,4 +1,4 @@
-# bmob-js-sdk-es6
+# apibox-js-sdk-es6
 
 ### SDK介绍
 
@@ -12,7 +12,7 @@
 
 下载dist目录中的最新版本Bmob.*.js 然后在项目中引入
 ```
-const APIBOX = require('../dist/APIBOX-1.0.1.min.js');
+const Apibox = require('../dist/apibox-1.0.1.min.js');
 ```
 
 ### **在WEB端和Node中使用** 
@@ -29,10 +29,10 @@ yarn add hydrogen-js-sdk
 **在Node中使用**
 ```
 // 引入
-import APIBOX from 'hydrogen-js-sdk'
+import Apibox from 'hydrogen-js-sdk'
 
 // 初始化
-APIBOX.initialize("你的Secret Key", "你的API 安全码");
+Apibox.initialize("你的Secret Key", "你的API 安全码");
 ```
 
 **在Vue中使用**
@@ -41,12 +41,12 @@ import Vue from 'vue'
 import App from './App.vue'
 
 // 引入
-import APIBOX from 'hydrogen-js-sdk'
+import Apibox from 'hydrogen-js-sdk'
 
 Vue.config.productionTip = false
 
 // 初始化
-APIBOX.initialize("你的Secret Key", "你的API 安全码");
+Apibox.initialize("你的Secret Key", "你的API 安全码");
 
 new Vue({
   render: h => h(App),
@@ -63,10 +63,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // 引入
-import APIBOX from 'hydrogen-js-sdk'
+import Apibox from 'hydrogen-js-sdk'
 
 // 初始化
-APIBOX.initialize("你的Secret Key", "你的API 安全码");
+Apibox.initialize("你的Secret Key", "你的API 安全码");
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -77,10 +77,10 @@ serviceWorker.unregister();
 
 下载dist目录中的最新版本Bmob.*.js 然后在html中引入
 ```
-<script src="APIBOX-2.2.0.min.js"></script>
+<script src="apibox-2.2.0.min.js"></script>
 <script>
 // 初始化
-APIBOX.initialize("你的Secret Key", "你的API 安全码");
+Apibox.initialize("你的Secret Key", "你的API 安全码");
 </script>
 ```
 
@@ -90,7 +90,7 @@ APIBOX.initialize("你的Secret Key", "你的API 安全码");
 为了您的前端应用安全，SDK 2.0以上版本启用新的初始化key，新SDK请使用以下方式初始化，其他方法未变动
 
 ```
-APIBOX.initialize("你的Secret Key", "你的API 安全码");
+Apibox.initialize("你的Secret Key", "你的API 安全码");
 ```
 
 **API 安全码**: 在应用功能设置，安全验证，API安全码自己设置
@@ -99,14 +99,14 @@ APIBOX.initialize("你的Secret Key", "你的API 安全码");
 SDK版本 **2.0.0** 以下保留之前的初始化方法
 
 ```
-APIBOX.initialize("你的Application ID", "你的REST API Key");
+Apibox.initialize("你的Application ID", "你的REST API Key");
 ```
 
 > 具体详细开发可参照下面的开发文档
 
 ### 开发文档
 
-https://bmob.github.io/hydrogen-js-sdk/#/?id=登陆
+https://apibox.github.io/apibox-js-sdk/#/?id=登陆
 
 #### 版本 v2.2.5
 
@@ -144,7 +144,7 @@ https://bmob.github.io/hydrogen-js-sdk/#/?id=登陆
 
 **Note:**
 
-> - 全面支持QQ小程序，小程序代码复用，替换最新bmob.js即可
+> - 全面支持QQ小程序，小程序代码复用，替换最新 apibox.js即可
 
 
 
@@ -153,15 +153,15 @@ https://bmob.github.io/hydrogen-js-sdk/#/?id=登陆
 **Note:**
 
 > - 修复初始变动导致SDK文件上传失败
-> - 增加获取openid新方法 `APIBOX.User.openId()` 
-> - webSocket 请求改为 `let BmobSocketIo =new APIBOX.Socket('appkey')` 初始化
+> - 增加获取openid新方法 `Apibox.User.openId()` 
+> - webSocket 请求改为 `let ApiboxSocketIo = new Apibox.Socket('appkey')` 初始化
 
 #### 版本 v2.0.0
 
 **Note:**
 
 > - SDK初始化变动，推出全新加密机制
-> - 增加debug调试模式 bmob.debug(tue) 可以打印请求相关信息
+> - 增加debug调试模式 apibox.debug(tue) 可以打印请求相关信息
 > - 修复config文件在小程序下引入异常问题
 
 
@@ -170,7 +170,7 @@ https://bmob.github.io/hydrogen-js-sdk/#/?id=登陆
 **Note:**
 
 > - 编译后的的语法修改为es5
-> - bmob.min.*.js文件增加版本信息、更新日期
+> - apibox.min.*.js文件增加版本信息、更新日期
 
 #### 版本 v1.7.0
 
@@ -207,7 +207,7 @@ https://bmob.github.io/hydrogen-js-sdk/#/?id=登陆
 
 > - 增加小视频视频截图功能
 > - 增加解密小程序数据接口
-> - 调用云函数增加支持Bmob.run方法
+> - 调用云函数增加支持 Apibox.run方法
 
 #### 版本 v1.6.3
 
@@ -275,7 +275,7 @@ https://bmob.github.io/hydrogen-js-sdk/#/?id=登陆
 
 > **Note:**
 >
-> - 增加小程序检测违规内容方法`APIBOX.checkMsg`
+> - 增加小程序检测违规内容方法`Apibox.checkMsg`
 > - 增加查询`===` 支持
 
 #### 版本 v1.4.2
@@ -296,7 +296,7 @@ https://bmob.github.io/hydrogen-js-sdk/#/?id=登陆
 > **Note:**
 >
 > - 增加超级权限`MasterKey`功能
-> - 增加后台数据库更新本地缓存也会自动更新函数`APIBOX.User.updateStorage`
+> - 增加后台数据库更新本地缓存也会自动更新函数`Apibox.User.updateStorage`
 > - 增加更新用户表、本地缓存会自动更新功能
 > - 优化请求网络请求对象
 
@@ -374,7 +374,7 @@ npm run dev
 |-- lib                   源码库文件
 |   |-- app.js            导出文件
 |   |-- axiosRequest.js   web请求库
-|   |-- bmob.js           初始化文件
+|   |-- apibox.js           初始化文件
 |   |-- common.js         短请求接口
 |   |-- config.dev.js     测试配置文件
 |   |-- config.js         配置文件
@@ -486,28 +486,6 @@ npm run dev
 ---
 
 1. 请求链接路由放到config文件PARAMETERS变量
-2. 变量函数命令统一用英文，尽量优先参考Bmob目前`jssdk` 相关名称。
+2. 变量函数命令统一用英文，尽量优先参考 Apibox 目前`jssdk` 相关名称。
 3. 开发一个函数功能，记得补上文档，具体请看文档模板 `doc.md`
 4. 操作数据库的函数语法在群里与队友商量确定
-
-
-
-### 相关知识点
-
----
-
-1. 【链接】多对多关系BmobRelation学习笔记（js，微信小程https://www.zybuluo.com/z77/note/1114404
-2. API 接口文档 http://doc.bmob.cn/data/restful/index.html
-
-
-
-### 感谢
-
----
-
-1. yanghuanrong   https://github.com/yanghuanrong
-2. youngjuning  https://github.com/youngjuning
-3. magic007 https://github.com/magic007
-4. BoolTrue https://github.com/BoolTrue
-
-> 在此欢迎大家贡献代码

@@ -1,7 +1,7 @@
 const request = require('./request')
 const storage = require('./storage')
 const query = require('./query')
-const APIBOX = require('./apibox')
+const Apibox = require('./apibox')
 const Error = require('./error')
 const {
   isObject,
@@ -29,7 +29,7 @@ const user = class user extends query {
       email
     })
     console.log(this.setData)
-    const route = APIBOX._config.parameters.REQUEST_EMAIL_VERIFY
+    const route = Apibox._config.parameters.REQUEST_EMAIL_VERIFY
     return request(route, 'post', this.setData)
   }
   register(parma) {
@@ -38,7 +38,7 @@ const user = class user extends query {
       throw new Error(415)
     }
     this.setData = Object.assign({}, parma)
-    const route = APIBOX._config.parameters.REGISTER
+    const route = Apibox._config.parameters.REGISTER
     return request(route, 'post', this.setData)
   }
 
@@ -51,7 +51,7 @@ const user = class user extends query {
       username,
       password
     })
-    const route = APIBOX._config.parameters.LOGIN
+    const route = Apibox._config.parameters.LOGIN
     return new Promise((resolve, reject) => {
       request(route, 'get', this.setData).then(res => {
         storage.save('apibox', res)
@@ -65,7 +65,7 @@ const user = class user extends query {
     storage.clear()
   }
   users() {
-    const route = APIBOX._config.parameters.USERS
+    const route = Apibox._config.parameters.USERS
     return request(route, 'get')
   }
   decryption(e) {
@@ -89,7 +89,7 @@ const user = class user extends query {
         'encryptedData': d,
         'iv': i
       }
-      const route = APIBOX._config.parameters.DECRYPTION
+      const route = Apibox._config.parameters.DECRYPTION
       request(route, 'POST', data)
         .then((res) => {
           resolve(res)
@@ -109,11 +109,11 @@ const user = class user extends query {
       mobilePhoneNumber,
       smsCode
     })
-    const route = APIBOX._config.parameters.LOGIN
+    const route = Apibox._config.parameters.LOGIN
     return request(route, 'get', this.setData)
   }
   requestOpenId(code, a = '') {
-    const route = APIBOX._config.parameters.WECHAT_APP
+    const route = Apibox._config.parameters.WECHAT_APP
     return request(route + code, 'POST', {
       'anonymous_code': a
     })
@@ -123,7 +123,7 @@ const user = class user extends query {
     let authData = {
       'authData': data
     }
-    const route = APIBOX._config.parameters.USERS
+    const route = Apibox._config.parameters.USERS
     return request(route, 'POST', authData)
   }
   loginWithWeapp(code, a = '', str) {

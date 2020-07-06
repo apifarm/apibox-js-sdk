@@ -1,5 +1,5 @@
 const request = require('./request')
-let APIBOX = require('./apibox')
+let Apibox = require('./apibox')
 const Error = require('./error')
 const utils = require('./utils')
 let md5 = require('./utf8md5')
@@ -19,7 +19,7 @@ class file {
       let ext = name.substring(name.lastIndexOf('.') + 1)
       list.push({
         name: name,
-        route: `${APIBOX._config.parameters.FILES}/${APIBOX._config.secretKey}.${ext}`,
+        route: `${Apibox._config.parameters.FILES}/${Apibox._config.secretKey}.${ext}`,
         data: parma
       })
     }
@@ -27,12 +27,12 @@ class file {
   fileUpload(p = '') {
     let that = this
     return new Promise((resolve, reject) => {
-      if (undefined === APIBOX.User) {
-        APIBOX = require('./apibox')
+      if (undefined === Apibox.User) {
+        Apibox = require('./apibox')
       }
 
       let sessionToken = 'apibox'
-      let current = APIBOX.User.current()
+      let current = Apibox.User.current()
       if (current) {
         sessionToken = current.sessionToken
       }
@@ -40,20 +40,20 @@ class file {
       const data = []
 
       const t = Math.round(new Date().getTime() / 1000)
-      const rand = APIBOX.utils.randomString()
+      const rand = Apibox.utils.randomString()
       let route = list[0].route
       if (p === 'wxc') {
-        route = route.replace(APIBOX._config.parameters.FILES, APIBOX._config.parameters.FILESCHECK)
+        route = route.replace(Apibox._config.parameters.FILES, Apibox._config.parameters.FILESCHECK)
       }
-      const sign = md5.utf8MD5(route + t + APIBOX._config.securityCode + rand)
+      const sign = md5.utf8MD5(route + t + Apibox._config.securityCode + rand)
       const key = {
         'content-type': 'application/json',
-        'X-APIBOX-SDK-Type': 'wxlite',
-        'X-APIBOX-Safe-Sign': sign,
-        'X-APIBOX-Safe-Timestamp': t,
-        'X-APIBOX-Noncestr-Key': rand,
-        'X-APIBOX-Session-Token': sessionToken,
-        'X-APIBOX-Secret-Key': APIBOX._config.secretKey
+        'X-Apibox-SDK-Type': 'wxlite',
+        'X-Apibox-Safe-Sign': sign,
+        'X-Apibox-Safe-Timestamp': t,
+        'X-Apibox-Noncestr-Key': rand,
+        'X-Apibox-Session-Token': sessionToken,
+        'X-Apibox-Secret-Key': Apibox._config.secretKey
       }
       const formData = Object.assign({
         '_ContentType': 'text/plain',
@@ -65,12 +65,12 @@ class file {
       for (let item of list) {
         let ro = item.route
         if (p === 'wxc') {
-          ro = item.route.replace(APIBOX._config.parameters.FILES, APIBOX._config.parameters.FILESCHECK)
+          ro = item.route.replace(Apibox._config.parameters.FILES, Apibox._config.parameters.FILESCHECK)
         }
 
-        console.log(item.route, APIBOX._config.parameters.FILESCHECK, 'ror')
+        console.log(item.route, Apibox._config.parameters.FILESCHECK, 'ror')
         wx.uploadFile({
-          url: APIBOX._config.host + ro, // 仅为示例，非真实的接口地址
+          url: Apibox._config.host + ro, // 仅为示例，非真实的接口地址
           filePath: item.data,
           name: 'file',
           header: key,
@@ -140,30 +140,30 @@ class file {
     } else if (type === 'hap') {
       // 快应用功能
       fileObj = new Promise((resolve, reject) => {
-        if (undefined === APIBOX.User) {
-          APIBOX = require('./apibox')
+        if (undefined === Apibox.User) {
+          Apibox = require('./apibox')
         }
         let sessionToken = 'apibox'
-        let current = APIBOX.User.current()
+        let current = Apibox.User.current()
         if (current) {
           sessionToken = current.sessionToken
         }
 
         const data = []
         const t = Math.round(new Date().getTime() / 1000)
-        const rand = APIBOX.utils.randomString()
+        const rand = Apibox.utils.randomString()
         const route = list[0].route
-        console.log('rand', rand, APIBOX, route)
+        console.log('rand', rand, Apibox, route)
 
-        const sign = md5.utf8MD5(route + t + APIBOX._config.securityCode + rand)
+        const sign = md5.utf8MD5(route + t + Apibox._config.securityCode + rand)
         const key = {
           'content-type': 'application/json',
-          'X-APIBOX-SDK-Type': 'wxlite',
-          'X-APIBOX-Safe-Sign': sign,
-          'X-APIBOX-Safe-Timestamp': t,
-          'X-APIBOX-Noncestr-Key': rand,
-          'X-APIBOX-Session-Token': sessionToken,
-          'X-APIBOX-Secret-Key': APIBOX._config.secretKey
+          'X-Apibox-SDK-Type': 'wxlite',
+          'X-Apibox-Safe-Sign': sign,
+          'X-Apibox-Safe-Timestamp': t,
+          'X-Apibox-Noncestr-Key': rand,
+          'X-Apibox-Session-Token': sessionToken,
+          'X-Apibox-Secret-Key': Apibox._config.secretKey
         }
         const formData = Object.assign({
           '_ContentType': 'text/plain',
@@ -174,14 +174,14 @@ class file {
         }, key)
         for (let item of list) {
           requestHap.upload({
-            url: APIBOX._config.host + item.route,
+            url: Apibox._config.host + item.route,
             files: [{
               uri: item.data,
               name: 'file',
               filename: item.name
             }],
             header: {
-              'X-APIBOX-SDK-Type': 'wxlite'
+              'X-Apibox-SDK-Type': 'wxlite'
             },
             data: formData,
             success: function (res) {
@@ -205,13 +205,13 @@ class file {
   }
   destroy(parma) {
     if (isString(parma)) {
-      return request(`${APIBOX._config.parameters.FILES}/upyun/${parma.split('.com/')[1]}`, 'delete')
+      return request(`${Apibox._config.parameters.FILES}/upyun/${parma.split('.com/')[1]}`, 'delete')
     } else if (isArray(parma)) {
       const data = []
       parma.map(item => {
         data.push(item.split('.com/')[1])
       })
-      return request(APIBOX._config.parameters.DELFILES, 'post', {
+      return request(Apibox._config.parameters.DELFILES, 'post', {
         'upyun': data
       })
     } else {

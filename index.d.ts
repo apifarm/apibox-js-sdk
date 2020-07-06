@@ -100,7 +100,7 @@ export class File {
 }
 
 
-export interface APIBOX {
+export interface Apibox {
   initialize: (secretKey: string, securityCode: string, masterKey?: string) => void;
   User: User;
   Query: (params: string) => Query;
@@ -128,6 +128,6 @@ export interface APIBOX {
   File: (name: string, object: any) => File
 }
 
-declare const APIBOX: APIBOX;
+declare const Apibox: Apibox;
 
-export default APIBOX
+export default Apibox

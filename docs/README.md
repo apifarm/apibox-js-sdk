@@ -4,16 +4,16 @@
 
 ### 下载
 
-> https://github.com/bmob/hydrogen-js-sdk/
+> https://github.com/apifarm/apibox-js-sdk/
 
 ### 安装使用
 
  **简介：**
 
-1. 整个SDK，就dist目录下Bmob.*.js 这个文件即可使用全部功能
+1. 整个SDK，就dist目录下 Apibox.*.js 这个文件即可使用全部功能
 2. 目前支持微信小程序、H5、快应用、游戏Cocos、混合App等
 
-**ps：这不只是微信小程序SDK，是跨平台SDK，相关平台都是引入**`APIBOX-x.x.x.min.js`
+**ps：这不只是微信小程序SDK，是跨平台SDK，相关平台都是引入**`apibox-x.x.x.min.js`
 
 ---
 
@@ -22,12 +22,12 @@
 压缩包引入
 
 ```
-var APIBOX = require('../dist/APIBOX-x.x.x.min.js');
+var Apibox = require('../dist/apibox-x.x.x.min.js');
 ```
 或者源码引入（nodejs必须源码引入）
 
 ```
-var APIBOX = require('./src/lib/app.js');
+var Apibox = require('./src/lib/app.js');
 ```
 
 
@@ -37,7 +37,7 @@ var APIBOX = require('./src/lib/app.js');
 为了您的前端应用安全，SDK 2.0版本启用新的初始化key，新SDK请使用以下方式初始化，其他方法未变动
 
 ```
-APIBOX.initialize("你的Secret Key", "你的API 安全码");
+Apibox.initialize("你的Secret Key", "你的API 安全码");
 ```
 
 **API 安全码**: 在应用功能设置，安全验证，API安全码自己设置
@@ -47,7 +47,7 @@ APIBOX.initialize("你的Secret Key", "你的API 安全码");
 SDK版本 **2.0.0** 以下保留之前的初始化方法
 
 ```
-APIBOX.initialize("你的Application ID", "你的REST API Key");
+Apibox.initialize("你的Application ID", "你的REST API Key");
 ```
 
 
@@ -63,7 +63,7 @@ npm install hydrogen-js-sdk
 引入
 
 ```
-import APIBOX from "hydrogen-js-sdk";
+import Apibox from "hydrogen-js-sdk";
 ```
 
 使用ES6前端相关框架，建议使用此方式引入。快应用由于网络包不支持npm，暂时不支持npm，头条小程序可以跟小程序一样使用。
@@ -77,20 +77,20 @@ Vue示例
 npm install hydrogen-js-sdk
 
 // 打开 main.js
-import APIBOX from "hydrogen-js-sdk";
+import Apibox from "apibox-js-sdk";
 
 
 // 初始化 SDK版本 2.0.0 以下保留之前的初始化方法
-APIBOX.initialize("你的Application ID", "你的REST API Key");
+Apibox.initialize("你的Application ID", "你的REST API Key");
 或者--------
 // 初始化 SDK版本 2.0.0 以及之后版本
-APIBOX.initialize("你的Secret Key", "你的API 安全码");
+Apibox.initialize("你的Secret Key", "你的API 安全码");
 
 // 挂载到全局使用
-Vue.prototype.APIBOX = APIBOX
+Vue.prototype.Apibox = Apibox
 
-// 项目其他页面使用跟小程序一样使用Bmob对象即可，例如：
-APIBOX.User.login('username','password').then(res => {
+// 项目其他页面使用跟小程序一样使用 Apibox 对象即可，例如：
+Apibox.User.login('username','password').then(res => {
    console.log(res)
  }).catch(err => {
   console.log(err)
@@ -120,7 +120,7 @@ APIBOX.User.login('username','password').then(res => {
 **请求示例：**
 
 ```
- APIBOX.User.login('username','password').then(res => {
+ Apibox.User.login('username','password').then(res => {
    console.log(res)
  }).catch(err => {
   console.log(err)
@@ -163,12 +163,12 @@ APIBOX.User.login('username','password').then(res => {
 
 ```
 let params = {
-	username: 'bmob2018',
-	password: 'bmob2018',
-	email: 'bmob2018@bmob.cn',
-	phone: '13711166567',
+	username: 'apibox',
+	password: 'apibox',
+	email: 'user@apibox.cc',
+	phone: '18322224444',
 }
-APIBOX.User.register(params).then(res => {
+Apibox.User.register(params).then(res => {
   console.log(res)
 }).catch(err => {
  console.log(err)
@@ -204,7 +204,7 @@ APIBOX.User.register(params).then(res => {
 **请求示例：**
 
 ```
-APIBOX.User.signOrLoginByMobilePhone(phone,smsCode).then(res => {
+Apibox.User.signOrLoginByMobilePhone(phone,smsCode).then(res => {
  console.log(res)
 }).catch(err => {
  console.log(err)
@@ -248,7 +248,7 @@ APIBOX.User.signOrLoginByMobilePhone(phone,smsCode).then(res => {
 **请求示例：**
 
 ```
- APIBOX.User.updateStorage('objectId').then(res => {
+ Apibox.User.updateStorage('objectId').then(res => {
    console.log(res)
  }).catch(err => {
   console.log(err)
@@ -276,13 +276,13 @@ APIBOX.User.signOrLoginByMobilePhone(phone,smsCode).then(res => {
 
 用户表属于系统表，默认情况下，接口只能查询。如需修改或删除，请登录当前用户，即可修改或删除当前用户资料。
 
-当然了，你也可以直接把`MasterKey`传入到`X-APIBOX-Master-Key`中, 这个就可以实现在不需要提供`SessionToken`的情形下更新和删除用户了，但希望只在开发环境下使用，不要把`MasterKey`发布出去。
+当然了，你也可以直接把`MasterKey`传入到`X-Apibox-Master-Key`中, 这个就可以实现在不需要提供`SessionToken`的情形下更新和删除用户了，但希望只在开发环境下使用，不要把`MasterKey`发布出去。
 
 传入MasterKey方式：
 
 ```
 //初始化时，多传入一个参数
-APIBOX.initialize("你的Application ID", "你的REST API Key", "你的MasterKey");
+Apibox.initialize("你的Application ID", "你的REST API Key", "你的MasterKey");
 ```
 
 ### 退出登录
@@ -294,7 +294,7 @@ APIBOX.initialize("你的Application ID", "你的REST API Key", "你的MasterKey
 **请求示例：**
 
 ```
-APIBOX.User.logout()
+Apibox.User.logout()
 ```
 
 
@@ -316,7 +316,7 @@ User表是一个特殊的表，专门用于存储用户对象。在浏览器端�
 **请求示例：**
 
 ```
-APIBOX.User.users().then(res => {
+Apibox.User.users().then(res => {
   console.log(res)
 }).catch(err => {
   console.log(err)
@@ -329,7 +329,7 @@ APIBOX.User.users().then(res => {
 {
 	results: [
 		{createdAt: "2018-04-19 17:26:45", objectId: "X43SIIIH", updatedAt: "2018-04-19 17:26:48",…}
-		{createdAt: "2018-04-19 17:42:59", email: "bmob2018@bmob.cn", objectId: "73d4587140",…}
+		{createdAt: "2018-04-19 17:42:59", email: "apibox@apibox.cc", objectId: "73d4587140",…}
 	]
 }
 ```
@@ -342,10 +342,10 @@ APIBOX.User.users().then(res => {
 
 ```
 //获取用户当前信息
-let current = APIBOX.User.current()
+let current = Apibox.User.current()
 
 //由于快应用新推出暂时不支持同步获取，如果是快应用请用以下写法
-APIBOX.User.current().then(result => {
+Apibox.User.current().then(result => {
       console.log(result)
     }).catch(err => {
       console.log(err)
@@ -374,11 +374,11 @@ APIBOX.User.current().then(result => {
 
 **简介：**
 
-设置邮件验证是一个可选的应用设置, 这样可以对已经确认过邮件的用户提供一部分保留的体验，邮件验证功能会在用户(User)对象中加入emailVerified字段, 当一个用户的邮件被新添加或者修改过的话，emailVerified会默认被设为false，如果应用设置中开启了邮箱认证功能，[APIBOX](http://www.bmob.cn/)会对用户填写的邮箱发送一个链接, 这个链接可以把emailVerified设置为 true.
+设置邮件验证是一个可选的应用设置, 这样可以对已经确认过邮件的用户提供一部分保留的体验，邮件验证功能会在用户(User)对象中加入emailVerified字段, 当一个用户的邮件被新添加或者修改过的话，emailVerified会默认被设为false，如果应用设置中开启了邮箱认证功能，[Apibox](http://www.apibox.cc/)会对用户填写的邮箱发送一个链接, 这个链接可以把emailVerified设置为 true.
 
 emailVerified 字段有 3 种状态可以考虑：
 
-**true** : 用户可以点击邮件中的链接通过[APIBOX](http://www.bmob.cn/)来验证地址，一个用户永远不会在新创建这个值的时候出现emailVerified为true。
+**true** : 用户可以点击邮件中的链接通过[Apibox](http://www.apibox.cc/)来验证地址，一个用户永远不会在新创建这个值的时候出现emailVerified为true。
 
 **false** : 用户(User)对象最后一次被刷新的时候, 用户并没有确认过他的邮箱地址, 如果你看到emailVerified为false的话，你可以考虑刷新 用户(User)对象。
 
@@ -395,7 +395,7 @@ emailVerified 字段有 3 种状态可以考虑：
 **请求示例：**
 
 ```
-APIBOX.User.requestEmailVerify('bmob2018@bmob.cn').then(res => {
+Apibox.User.requestEmailVerify('user@apibox.cc').then(res => {
   console.log(res)
 }).catch(err => {
  console.log(err)
@@ -410,7 +410,7 @@ APIBOX.User.requestEmailVerify('bmob2018@bmob.cn').then(res => {
   "msg": "ok"
 }
 失败：
-{code: 120, error: "Email verify should be opened in your app setup page of bmob."}
+{code: 120, error: "Email verify should be opened in your app setup page of apibox."}
 ```
 
 ### 密码重置
@@ -448,7 +448,7 @@ Eamil密码重置
 let data = {
   email: '329685131@qq.com'
 }
-APIBOX.requestPasswordReset(data).then(res => {
+Apibox.requestPasswordReset(data).then(res => {
   console.log(res)
 }).catch(err => {
   console.log(err)
@@ -480,7 +480,7 @@ let smsCode= 'smsCode'
 let data = {
   password: 'password'
 }
-APIBOX.resetPasswordBySmsCode(smsCode,data).then(res => {
+Apibox.resetPasswordBySmsCode(smsCode,data).then(res => {
   console.log(res)
 }).catch(err => {
   console.log(err)
@@ -498,7 +498,7 @@ APIBOX.resetPasswordBySmsCode(smsCode,data).then(res => {
  **请求描述：**
 很多开发者希望让用户输入一次旧密码做一次校验，旧密码正确才可以修改为新密码，因此我们提供了一个单独的 API PUT /1/updatePassword 来安全地修改用户密码。
 
-注意：仍然需要传入 X-APIBOX-Session-Token，也就是登录用户才可以修改自己的密码。
+注意：仍然需要传入 X-Apibox-Session-Token，也就是登录用户才可以修改自己的密码。
 **参数说明：**
 
 | 参数      | 类型   | 必填 | 说明     |
@@ -513,7 +513,7 @@ let data = {
   oldPassword: 'oldPassword',
   newPassword: 'newPassword'
 }
-APIBOX.updateUserPassword(objectId,data).then(res => {
+Apibox.updateUserPassword(objectId,data).then(res => {
     console.log(res)
   }).catch(err => {
     console.log(err)
@@ -544,11 +544,11 @@ APIBOX.updateUserPassword(objectId,data).then(res => {
 
     let data = {
       data: {
-    alert: "Hello From APIBOX."
+    alert: "Hello From Apibox."
       }
     }
     
-    APIBOX.push(data).then(res => {
+    Apibox.push(data).then(res => {
       console.log(res)
     }).catch(err => {
       console.log(err)
@@ -576,7 +576,7 @@ APIBOX.updateUserPassword(objectId,data).then(res => {
 **请求示例：**
 
 ```
-const query = APIBOX.Query('tableName');
+const query = Apibox.Query('tableName');
 query.get('objectId').then(res => {
   console.log(res)
 }).catch(err => {
@@ -619,8 +619,8 @@ query.get('objectId').then(res => {
 **请求示例：**
 
 
-    const query = APIBOX.Query('tableName');
-    query.set("name","APIBOX")
+    const query = Apibox.Query('tableName');
+    query.set("name","Apibox")
     query.set("cover","后端云")
     query.save().then(res => {
       console.log(res)
@@ -655,7 +655,7 @@ query.get('objectId').then(res => {
 
 ```
  方式一：
- const query = APIBOX.Query('tableName');
+ const query = Apibox.Query('tableName');
  query.set('id', 'objectId') //需要修改的objectId
  query.set('nickName', 'Bmob后端云')
  query.save().then(res => {
@@ -665,7 +665,7 @@ query.get('objectId').then(res => {
  })
 或者
 方式二：
-const query = APIBOX.Query('tableName');
+const query = Apibox.Query('tableName');
 query.get('objectId').then(res => {
   console.log(res)
   res.set('cover','3333')
@@ -703,7 +703,7 @@ query.get('objectId').then(res => {
 **请求示例：**
 
 ```
-const query = APIBOX.Query('tableName');
+const query = Apibox.Query('tableName');
 query.get('objectId').then(res => {
   console.log(res)
   res.unset('cover')
@@ -738,7 +738,7 @@ query.get('objectId').then(res => {
 
 **请求示例：**
 
-    const query = APIBOX.Query('tableName');
+    const query = Apibox.Query('tableName');
     query.destroy('objectId').then(res => {
       console.log(res)
     }).catch(err => {
@@ -748,7 +748,7 @@ query.get('objectId').then(res => {
 or
 
 
-    const query = APIBOX.Query('tableName');
+    const query = Apibox.Query('tableName');
     query.get('objectId').then(res => {
       res.destroy().then(res => {
     console.log(res)
@@ -783,7 +783,7 @@ or
 **请求示例：**
 
 ```
-const query = APIBOX.Query("tableName");
+const query = Apibox.Query("tableName");
 query.find().then(res => {
     console.log(res)
 });
@@ -806,7 +806,7 @@ query.find().then(res => {
 **添加数组：**
 
 ```
-const query = APIBOX.Query('tableName')
+const query = Apibox.Query('tableName')
 query.add("DiaryType", ["public"]);
 query.addUnique("DiaryType", ["secret"]);
 query.save();
@@ -817,7 +817,7 @@ query.save();
 **更新数组：**
 
 ```
-const query = APIBOX.Query('tableName')
+const query = Apibox.Query('tableName')
 query.get('ObjectId').then(res => {
   res.add("DiaryType", ["public"]);
   res.addUnique("DiaryType", ["secret"]);
@@ -830,7 +830,7 @@ query.get('ObjectId').then(res => {
 **删除数组：**
 
 ```
-const query = APIBOX.Query('tableName')
+const query = Apibox.Query('tableName')
 query.get('ObjectId').then(res => {
   res.remove("DiaryType", ["secret"]);
   res.save();
@@ -856,7 +856,7 @@ query.get('ObjectId').then(res => {
 **请求示例：**
 
 ```
-const query = APIBOX.Query('tableName')
+const query = Apibox.Query('tableName')
 query.get('objectId').then(res => {
     res.increment('field')
     res.save()
@@ -882,7 +882,7 @@ query.get('objectId').then(res => {
 query.equalTo("isLike", "==", 100);
 
 // 如果要查询某个属性不等于某个值，示例代码如下：
-query.equalTo("title", "!=", "bmob sdk");
+query.equalTo("title", "!=", "apibox sdk");
 
 // 如果要模糊查询某个值，示例代码如下（模糊查询目前只提供给付费套餐会员使用）：
 query.equalTo("title","==", { "$regex": "" + k + ".*" });
@@ -906,7 +906,7 @@ query.equalTo("createdAt", "<", "2018-05-01 00:00:00");
 
 一个完整的例子
 ```
-const query = APIBOX.Query("tableName");
+const query = Apibox.Query("tableName");
 query.equalTo("title","==", "hello");
 query.find().then(res => {
     console.log(res)
@@ -918,7 +918,7 @@ query.find().then(res => {
 你可以使用`or`方法操作或查询，示例代码如下：
 
 ```
-const query = APIBOX.Query("tableName");
+const query = Apibox.Query("tableName");
 const query1 = query.equalTo("isLike", '>', 150);
 const query2 = query.equalTo("isLike", '<', 150);
 
@@ -932,7 +932,7 @@ query.find().then(res => {
 ### **查询指定列**
 
 ```
-const query = APIBOX.Query("tableName");
+const query = Apibox.Query("tableName");
 // 只返回select的字段值
 query.select("title");
 query.find().then(res => {
@@ -943,10 +943,10 @@ query.find().then(res => {
 
 ### **复杂查询**
 
-如果你想查询某一字段值在某一集合中的记录的话，可以使用`containedIn`方法，如获取`"APIBOX"、"Codenow"、"JS"`这三位玩家的记录信息，那么示例代码如下
+如果你想查询某一字段值在某一集合中的记录的话，可以使用`containedIn`方法，如获取`"Apibox"、"Codenow"、"JS"`这三位玩家的记录信息，那么示例代码如下
 ```
 // 第一个参数是字段名称，第二个参数是数组
-query.containedIn("playerName", ["APIBOX", "Codenow", "JS"]);
+query.containedIn("playerName", ["Apibox", "Codenow", "JS"]);
 ```
 相反地，你可以使用`notContainedIn`方法来查询在集合外的目标对象。
 
@@ -989,7 +989,7 @@ query.order("-score","name");
 
 如果你只是想统计满足`query`的结果集到底有多条记录，你可以使用`count`方法。如为了获得diary表的记录数量，示例代码如下：
 ```
-const query = APIBOX.Query('diary');
+const query = Apibox.Query('diary');
 query.count().then(res => {
   console.log(`共有${res}条记录`)
 });
@@ -1008,7 +1008,7 @@ query.count().then(res => {
 例如我需要查询Post（帖子表，字段own 类型Pointer 关联用户表）表，发帖用户是*hello*的用户。代码如下
 
 ```
-const query = APIBOX.Query("Post");
+const query = Apibox.Query("Post");
 query.statTo("where", '{"own":{"$inQuery":{"where":{"username":"Hello"},"className":"_User"}}}');
 query.find().then(res => {
   console.log(res)
@@ -1020,7 +1020,7 @@ query.find().then(res => {
 反之亦然，如果需求是不匹配查询条件的可以使用*$notInQuery*，参考下面写法
 
 ```
-const query = APIBOX.Query("Post");
+const query = Apibox.Query("Post");
 query.statTo("where", '{"own":{"$notInQuery":{"where":{"username":"Hello"},"className":"_User"}}}');
 query.find().then(res => {
   console.log(res)
@@ -1049,7 +1049,7 @@ query.find().then(res => {
 **请求示例：**
 
 ```
-const query = APIBOX.Query('tableName');
+const query = Apibox.Query('tableName');
 query.find().then(todos => {
   todos.set('aab', "Bmob后端云");
   todos.set('bb', 'Bmob后端云');
@@ -1098,14 +1098,14 @@ query.find().then(todos => {
 const queryArray = new Array();
 // 构造含有50个对象的数组
 for(var i = 0 ; i < 50 ; i++){
-  var queryObj = APIBOX.Query('tableName');
+  var queryObj = Apibox.Query('tableName');
   queryObj.set('columnName','abc' + i);
   queryArray.push(queryObj);
 }
 
 
 // 传入刚刚构造的数组
-APIBOX.Query('tableName').saveAll(queryArray).then(result => {
+Apibox.Query('tableName').saveAll(queryArray).then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err);
@@ -1125,7 +1125,7 @@ APIBOX.Query('tableName').saveAll(queryArray).then(result => {
 **请求示例：**
 
 ```
-const query = APIBOX.Query('tableName');
+const query = Apibox.Query('tableName');
 // 单词最多删除50条
 query.limit(50)
 query.find().then(todos => {
@@ -1189,7 +1189,7 @@ query.find().then(todos => {
 **请求示例：**
 
 ```
-const query = APIBOX.Query('tableName');
+const query = Apibox.Query('tableName');
 //下面参数为Pointer字段名称， 可以一次查询多个表
 query.include('own','post')
 query.find().then(res => {
@@ -1226,10 +1226,10 @@ query.find().then(res => {
 
 ```
 //poiID User表Pointer对象
-const pointer = APIBOX.Pointer('_User')
+const pointer = Apibox.Pointer('_User')
 const poiID = pointer.set('QdXD888B')
 
-const query = APIBOX.Query('test')
+const query = Apibox.Query('test')
 //userId 字段名称关联用户表 ，类型Pointer
 query.equalTo("userId","==", poiID);
 query.find().then(res => {
@@ -1243,9 +1243,9 @@ query.find().then(res => {
 简介：Pointer 类型在数据库是一个json数据类型，只需调用Pointer方法创建一个Pointer对象存入到字段中，如下：
 
 ```
-const pointer = APIBOX.Pointer('_User')
+const pointer = Apibox.Pointer('_User')
 const poiID = pointer.set('QdXD888B')
-const query = APIBOX.Query('test')
+const query = Apibox.Query('test')
 query.get('c02b7b018f').then(res => {
   res.set('own',poiID)
   res.save()
@@ -1258,7 +1258,7 @@ query.get('c02b7b018f').then(res => {
 删除Pointer类型非常的简单，和删除普通的字段类型一样，如下：
 
 ```
-const query = APIBOX.Query('test')
+const query = Apibox.Query('test')
 query.get('c02b7b018f').then(res => {
   res.unset('own')
   res.save()
@@ -1279,9 +1279,9 @@ Relation 一对多，多对多表关联，**一个帖子可以被很多用户所
 **请求示例：**
 
 ```
-const relation = APIBOX.Relation('_User') // 需要关联的表
+const relation = Apibox.Relation('_User') // 需要关联的表
 const relID = relation.add(['5PnCXXX6','QdXD888B']) //关联表中需要关联的objectId, 返回一个Relation对象, add方法接受string和array的类型参数
-const query = APIBOX.Query('test')
+const query = Apibox.Query('test')
 query.get('jzQMAAAO').then(res => {
   res.set('two',relID); // 将Relation对象保存到two字段中，即实现了一对多的关联
   res.save()
@@ -1293,7 +1293,7 @@ query.get('jzQMAAAO').then(res => {
 **请求示例：**
 
 ```
-const relation = APIBOX.Relation('_User')
+const relation = Apibox.Relation('_User')
 const relID = relation.remove(['5PnCXXX6','QdXD888B'])
 query.get('jzQMAAAO').then(res => {
   res.set('two',relID);
@@ -1310,7 +1310,7 @@ query.get('jzQMAAAO').then(res => {
 
 **请求示例：**
 ```
-const query = APIBOX.Query('abcd')
+const query = Apibox.Query('abcd')
 query.field('two','a312d300eb')
 query.relation('_User').then(res => {
   console.log(res);
@@ -1381,7 +1381,7 @@ Bmob的统计查询，提供以下关键字或其组合的查询操作：
 我们要计算GameScore表所有玩家的得分总和，sum后面只能拼接Number类型的列名，即要计算哪个列的值的总和，只对Number类型有效，多个Number列用,分隔，则查询如下：
 
 ```    
-const query = APIBOX.Query("GameScore");
+const query = Apibox.Query("GameScore");
 query.statTo("sum", "score");
 query.find().then(res => {
   console.log(res)
@@ -1404,7 +1404,7 @@ query.find().then(res => {
 比如我们以创建时间按天统计所有玩家的得分，并按时间降序, groupby后面只能拼接列名，如果该列是时间类型，则按天分组，其他类型，则按确定值分组:
 
 ```
-const query = APIBOX.Query("GameScore");
+const query = Apibox.Query("GameScore");
 query.statTo("sum", "score");
 query.statTo("groupby", "createdAt");
 query.statTo("order", "-createdAt");
@@ -1432,7 +1432,7 @@ query.find().then(res => {
 比如我们以创建时间按天和按玩家名称分组统计所有玩家的得分1，得分2的总和，并按得分1的总和降序, groupby后面只能拼接列名，如果该列是时间类型，则按天分组，其他类型，则按确定值分组:
 
 ```
-const query = APIBOX.Query("GameScore");
+const query = Apibox.Query("GameScore");
 query.statTo("sum", "score1, score2");
 query.statTo("groupby", "createdAt, playerName");
 query.statTo("order", "-_sumscore1");
@@ -1470,7 +1470,7 @@ query.find().then(res => {
 比如我们以创建时间按天统计所有玩家的得分，并只返回某天的总得分大于2000的记录，并按时间降序，having是用于过滤部分结果，其中的_sumScore是 `_sum+首字母大写的列名` 的格式表示是计算这个列的总和的值:
 
 ```
-const query = APIBOX.Query("GameScore");
+const query = Apibox.Query("GameScore");
 query.statTo("sum", "score");
 query.statTo("having",{"_sumScore":{"$gt": 2000}});
 query.statTo("groupby", "createdAt");
@@ -1497,7 +1497,7 @@ query.find().then(res => {
 
 ```
 
-const query = APIBOX.Query("GameScore");
+const query = Apibox.Query("GameScore");
 query.statTo("sum", "score");
 query.statTo("groupby", "createdAt");
 query.statTo("groupcount", "true");
@@ -1530,7 +1530,7 @@ query.find().then(res => {
 比如我们获取表中所有的唯一的score:
 
 ```
-const query = APIBOX.Query("GameScore");
+const query = Apibox.Query("GameScore");
 query.statTo("groupby", "score");
 query.find().then(res => {
   console.log(res)
@@ -1559,7 +1559,7 @@ average(计算平均值)， max(计算最大值)，min(计算最小值)和sum查
 ### 创建地理位置对象
 
 ```
-const point = APIBOX.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
+const point = Apibox.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
 ```
 
 ### 查询地理位置
@@ -1567,7 +1567,7 @@ const point = APIBOX.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
 为了限定搜索的最大距离范围，需要加入 `公里` 参数来限定，如果不加，则默认是100KM的半径。比如要找的半径在10公里内的话
 
 ```
-const query = APIBOX.Query("tableName");
+const query = Apibox.Query("tableName");
 query.withinKilometers("字段名", point, 10);  //10指的是公里
 query.find().then(res => {
 	console.log(res)
@@ -1577,9 +1577,9 @@ query.find().then(res => {
 同样作查询寻找在一个特定的范围里面的对象也是可以的，为了找到在一个矩形区域里的对象，按下面的格式加入一个约束
 
 ```
-const point = APIBOX.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
-const point1 = APIBOX.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
-const query = APIBOX.Query("tableName");
+const point = Apibox.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
+const point1 = Apibox.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
+const query = Apibox.Query("tableName");
 query.withinGeoBox("字段名", point, point1);  //制造一个矩形区域
 query.find().then(res => {
 	console.log(res)
@@ -1591,8 +1591,8 @@ query.find().then(res => {
 ### 添加地理位置
 
 ```
-const point = APIBOX.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
-const query = APIBOX.Query('tableName');
+const point = Apibox.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
+const query = Apibox.Query('tableName');
 query.set("字段名称",point)
 query.save().then(res => {
   console.log(res)
@@ -1608,8 +1608,8 @@ query.save().then(res => {
 
 
 ```
-const point = APIBOX.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
-const query = APIBOX.Query('tableName')
+const point = Apibox.GeoPoint({ latitude: 23.052033,longitude: 113.405447 })
+const query = Apibox.Query('tableName')
 query.get('c02b7b018f').then(res => {
   res.set('字段名称',point)
   res.save()
@@ -1640,7 +1640,7 @@ let params =　{
 	name : 'apibox'
   }
 }
-APIBOX.functions(params.funcName,params.data).then(function (response) {
+Apibox.functions(params.funcName,params.data).then(function (response) {
 	console.log(response);
 })
 .catch(function (error) {
@@ -1697,7 +1697,7 @@ fileUploadControl.onchange = () => {
   const pic = fileUploadControl.files
   let file
   for(let item of pic){
-     file = APIBOX.File(item.name, item);
+     file = Apibox.File(item.name, item);
   }
   file.save().then(res => {
     console.log(res.length);
@@ -1732,7 +1732,7 @@ upload:function(){
         var file;
         for (let item of tempFilePaths) {
           console.log('itemn',item)
-          file = APIBOX.File('abc.jpg', item);
+          file = Apibox.File('abc.jpg', item);
         }
         file.save().then(res => {
           console.log(res.length);
@@ -1767,7 +1767,7 @@ query.save().then(res => {
 
 ### 图片缩略图
 
-图片文件服务由第三方厂商又拍云提供 ， 只需要在文件上传成功返回的url后面拼接特定参数即可实现缩放，缩略图，加水印等效果，[如图](http://bmob-cdn-9200.b0.upaiyun.com/2017/04/25/f24b9ef540f1aeb680ebe01ba8543d9f.png!/scale/80/watermark/text/5rC05Y2wCg==)，具体可参考[这里](http://docs.upyun.com/cloud/image/) 。
+图片文件服务由第三方厂商又拍云提供 ， 只需要在文件上传成功返回的url后面拼接特定参数即可实现缩放，缩略图，加水印等效果，[如图](http://apibox-cdn-9200.b0.upaiyun.com/2017/04/25/f24b9ef540f1aeb680ebe01ba8543d9f.png!/scale/80/watermark/text/5rC05Y2wCg==)，具体可参考[这里](http://docs.upyun.com/cloud/image/) 。
 
 ### 视频缩略图
 
@@ -1783,11 +1783,11 @@ query.save().then(res => {
 
 ```
 curl -X POST \
-  http://api2.bmob.cn/2/cdnVedioSnapshot \
+  http://api2.apibox.cc/2/cdnVedioSnapshot \
   -H 'content-type: application/json' \
-  -H 'x-bmob-application-id: xxx' \
-  -H 'x-bmob-rest-api-key: xxx' \
-  -d '{"source": "https://bmob-cdn-80.b0.upaiyun.com/2018/08/17/f4ca5b26305348c88ae70818982c1168.mp4", "save_as": "https://bmob-cdn-80.b0.upaiyun.com/f4ca5b26305348c88ae70818982c1161.jpg", "point": "00:00:05"}'
+  -H 'x-apibox-application-id: xxx' \
+  -H 'x-apibox-rest-api-key: xxx' \
+  -d '{"source": "https://apibox-cdn-80.b0.upaiyun.com/2018/08/17/f4ca5b26305348c88ae70818982c1168.mp4", "save_as": "https://apibox-cdn-80.b0.upaiyun.com/f4ca5b26305348c88ae70818982c1161.jpg", "point": "00:00:05"}'
   
 //{"source": "<视频的存储地址>", "point": "<时间点>", "save_as": "<截图保存地址>"}
 ```
@@ -1815,8 +1815,8 @@ curl -X POST \
 **请求示例：**
 ```
 // 传入string是单个文件删除，传入array是批量删除
-const del = APIBOX.File();
-const val =  ["http://bmob-cdn-15009.b0.upaiyun.com/2018/05/02/aae4998a403e018680a7eff90852905e.jpg"]
+const del = Apibox.File();
+const val =  ["http://apibox-cdn-15009.b0.upaiyun.com/2018/05/02/aae4998a403e018680a7eff90852905e.jpg"]
 del.destroy(val).then(res => {
   console.log(res);
 }).catch(err => {
@@ -1858,7 +1858,7 @@ del.destroy(val).then(res => {
 **请求示例：**
 
 ```
-APIBOX.User.auth().then(res => {
+Apibox.User.auth().then(res => {
       console.log(res)
       console.log('一键登陆成功')
 
@@ -1899,7 +1899,7 @@ APIBOX.User.auth().then(res => {
 ```
 getUserInfo: function(e) {
     app.globalData.userInfo = e.detail.userInfo
-    APIBOX.User.upInfo(e.detail.userInfo)
+    Apibox.User.upInfo(e.detail.userInfo)
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
@@ -1921,7 +1921,7 @@ getUserInfo: function(e) {
 **请求示例：**
 
 ```
-APIBOX.User.upInfo(e.detail.userInfo).then(result => {
+Apibox.User.upInfo(e.detail.userInfo).then(result => {
       console.log(result)
     }).catch(err => {
       console.log(err)
@@ -1952,7 +1952,7 @@ APIBOX.User.upInfo(e.detail.userInfo).then(result => {
 
 //js
  getPhoneNumber: function (res) {
-    wx.APIBOX.User.decryption(res).then(res => {
+    wx.Apibox.User.decryption(res).then(res => {
       console.log(res)
   })
     
@@ -1976,14 +1976,14 @@ onShareAppMessage: function (res) {
       console.log(res.target)
     }
     return {
-      title: 'APIBOX 示例',
+      title: 'Apibox 示例',
       path: 'pages/index/index',
       success: function (res) {
         wx.getShareInfo({
           shareTicket: res.shareTickets,
           success(res) {
             // 调用解密
-            wx.APIBOX.User.decryption(res).then(res => {
+            wx.Apibox.User.decryption(res).then(res => {
               console.log(res)
             })
           }
@@ -2006,7 +2006,7 @@ onShareAppMessage: function (res) {
 ```
 wx.getWeRunData({
       success(res) {
-        wx.APIBOX.User.decryption(res).then(res => {
+        wx.Apibox.User.decryption(res).then(res => {
           console.log(res)
         })
       }
@@ -2038,14 +2038,14 @@ wx.getWeRunData({
 
 **参数说明：**
 
-APIBOX.generateCode 参数列表
+Apibox.generateCode 参数列表
 
 | 键 | 值 |参数说明 |
 | --------- | ----------------- | ------------ |
 | path      | pages/index/index | 页面路径，支持参数 |
 | width     |        430        | 二维码宽度，这个参数微信规定不能少于180 |
 | interface |        a\b\c      | 对应微信二维码abc方案 |
-| scene     |        APIBOX       | 微信B方案才需要此值 |
+| scene     |        Apibox       | 微信B方案才需要此值 |
 | type      |        0/1        | 默认0，返回二维码base64数据.如果为1则服务端返回为二维码网络路径 |
 
 更多微信官方小程序码介绍 [微信官方小程序码介绍](https://mp.weixin.qq.com/debug/wxadoc/dev/api/qrcode.html "微信官方小程序码介绍")
@@ -2053,7 +2053,7 @@ APIBOX.generateCode 参数列表
 **请求示例：**
 
     let qrData = { path: 'path', width: width, type: 1 }
-    APIBOX.generateCode(qrData).then(function (res) {
+    Apibox.generateCode(qrData).then(function (res) {
     	console.log(res);
     })
     .catch(function (err) {
@@ -2089,7 +2089,7 @@ APIBOX.generateCode 参数列表
 
 ```
 let content = 'hello'
-APIBOX.checkMsg(content).then(res => {
+Apibox.checkMsg(content).then(res => {
 	console.log(res)
 }).catch(err => {
 	console.log(err)
@@ -2138,7 +2138,7 @@ upload:function(){
         var file;
         for (let item of tempFilePaths) {
           console.log('itemn',item)
-          file = APIBOX.File('abc.jpg', item);
+          file = Apibox.File('abc.jpg', item);
         }
         file.save().then(res => {
           console.log(res.length);
@@ -2173,7 +2173,7 @@ upload:function(){
 
 **请求示例：**
 
-    APIBOX.getAccessToken().then(function (response) {
+    Apibox.getAccessToken().then(function (response) {
     	console.log(response);
     })
     .catch(function (error) {
@@ -2228,7 +2228,7 @@ upload:function(){
     	,"emphasis_keyword": ""
     }
     
-    APIBOX.sendWeAppMessage(modelData).then(function (response) {
+    Apibox.sendWeAppMessage(modelData).then(function (response) {
     	console.log(response);
     }).catch(function (error) {
     	console.log(error);
@@ -2282,7 +2282,7 @@ upload:function(){
 ```
 var openId = wx.getStorageSync('openid');
 //传参数金额，名称，描述,openid
-    APIBOX.Pay.weApp(0.01, '哇哈哈1瓶', '哇哈哈饮料，杭州生产', openId).then(function (resp) {
+    Apibox.Pay.weApp(0.01, '哇哈哈1瓶', '哇哈哈饮料，杭州生产', openId).then(function (resp) {
       console.log(resp);
 
       that.setData({
@@ -2347,7 +2347,7 @@ var openId = wx.getStorageSync('openid');
     	refund_fee: fee,
     	desc:"退款"
     }
-    APIBOX.refund(data).then(function (response) {
+    Apibox.refund(data).then(function (response) {
     	console.log(response);
     })
     .catch(function (error) {
@@ -2372,7 +2372,7 @@ var openId = wx.getStorageSync('openid');
 
 //js
  getPhoneNumber: function (res) {
-    wx.APIBOX.User.decryption(res).then(res => {
+    wx.Apibox.User.decryption(res).then(res => {
       console.log(res)
   })
     
@@ -2396,14 +2396,14 @@ onShareAppMessage: function (res) {
       console.log(res.target)
     }
     return {
-      title: 'APIBOX 示例',
+      title: 'Apibox 示例',
       path: 'pages/index/index',
       success: function (res) {
         wx.getShareInfo({
           shareTicket: res.shareTickets,
           success(res) {
             // 调用解密
-            wx.APIBOX.User.decryption(res).then(res => {
+            wx.Apibox.User.decryption(res).then(res => {
               console.log(res)
             })
           }
@@ -2427,7 +2427,7 @@ onShareAppMessage: function (res) {
 ```
 wx.getWeRunData({
       success(res) {
-        wx.APIBOX.User.decryption(res).then(res => {
+        wx.Apibox.User.decryption(res).then(res => {
           console.log(res)
         })
       }
@@ -2476,7 +2476,7 @@ wx.getWeRunData({
     let temp = {
       touser: "openid",
       template_id:"template_id",
-      url: "http://www.bmob.cn/",
+      url: "http://www.apibox.cc/",
       data: {
     		first: {
     			value: "您好，Restful 失效，请登录控制台查看。",
@@ -2497,7 +2497,7 @@ wx.getWeRunData({
       	}
     }
     
-    APIBOX.notifyMsg(temp).then(function (response) {
+    Apibox.notifyMsg(temp).then(function (response) {
     console.log(response);
     })
     .catch(function (error) {
@@ -2588,7 +2588,7 @@ Bmob提供了数据实时功能，当开发者监听某个变化事件，例如�
 对实时数据对象进行初始化
 
 ```
-let BmobSocketIo =new APIBOX.Socket()
+let BmobSocketIo =new Apibox.Socket()
 ```
 
 ### 订阅事件
@@ -2687,11 +2687,11 @@ tablename为更新的表，objectId为更新行的objectId，data为服务端返
 
 ### demo
 
-在线上演示实时数据平台的一个聊天应用的demo：[chat room demo](http://chatroom.bmob.cn) ，演示了如何使用实时数据服务实现聊天的功能。
+在线上演示实时数据平台的一个聊天应用的demo：[chat room demo](http://chatroom.apibox.cn) ，演示了如何使用实时数据服务实现聊天的功能。
 
 用浏览器打开两个窗口，在其中一个窗口输入`昵称`和`内容`，按`发送`按钮，在另外一个窗口能看到发送的内容。
 
-小程序DEMO，搜索小程序：**APIBOX 示例 **
+小程序DEMO，搜索小程序：**Apibox 示例 **
 
 
 
@@ -2714,7 +2714,7 @@ tablename为更新的表，objectId为更新行的objectId，data为服务端返
     let params = {
     	mobilePhoneNumber: 'mobilePhoneNumber' //string
     }
-    APIBOX.requestSmsCode(params).then(function (response) {
+    Apibox.requestSmsCode(params).then(function (response) {
     	console.log(response);
     })
     .catch(function (error) {
@@ -2746,7 +2746,7 @@ tablename为更新的表，objectId为更新行的objectId，data为服务端返
     let data = {
       mobilePhoneNumber: 'telephone'
     }
-    APIBOX.verifySmsCode(smsCode, data).then(function (response) {
+    Apibox.verifySmsCode(smsCode, data).then(function (response) {
     	console.log(response);
     })
     .catch(function (error) {

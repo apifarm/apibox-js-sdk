@@ -1,4 +1,4 @@
-// const APIBOX = require('./bmob')
+// const Apibox = require('./apibox')
 const utils = require('./utils')
 
 let request

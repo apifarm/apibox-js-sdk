@@ -4,13 +4,12 @@
  * @LastEditTime: 2020-03-12 16:06:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: /bmob-js-sdk-es6/src/lib/config.dev.js
+ * @FilePath: /apibox-js-sdk-es6/src/lib/config.dev.js
  */
 // const ROOT = require('../../package.json')
-// const HOST = 'https://api.bmobcloud.com'
+// const HOST = 'https://api.apiboxcloud.com'
 // const HOST = 'http://127.0.0.1:8080'
-const HOST = 'https://apitest.bmob.cn'
-// const HOST = 'http://apis.feipin-ge.com'
+const HOST = 'https://apitest.apibox.cn'
 const APPLICATION_ID = ''
 const APPLICATION_KEY = ''
 // const VERSION = `v${ROOT.version}`

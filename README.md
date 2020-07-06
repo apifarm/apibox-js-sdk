@@ -2,7 +2,7 @@
 
 ### SDK介绍
 
-本SDK基于es6开发，致力打造基于前端混合开发需求，支持微信小程序、H5、快应用、游戏Cocos、混合App等平台, 整个SDK，就dist目录下Bmob.*.js 这个文件即可使用全部功能，请使用最新版本。
+本SDK基于es6开发，致力打造基于前端混合开发需求，支持微信小程序、H5、快应用、游戏Cocos、混合App等平台, 整个SDK，就dist目录下 apibox.*.js 这个文件即可使用全部功能，请使用最新版本。
 
 
 
@@ -10,7 +10,7 @@
 
 ### **在小程序中使用** 【微信小程序】【QQ小程序】【支付宝小程序】【头条小程序】
 
-下载dist目录中的最新版本Bmob.*.js 然后在项目中引入
+下载dist目录中的最新版本 apibox.*.js 然后在项目中引入
 ```
 const Apibox = require('../dist/apibox-1.0.1.min.js');
 ```
@@ -75,7 +75,7 @@ serviceWorker.unregister();
 
 **在HTML中使用**
 
-下载dist目录中的最新版本Bmob.*.js 然后在html中引入
+下载dist目录中的最新版本 apibox.*.js 然后在html中引入
 ```
 <script src="apibox-2.2.0.min.js"></script>
 <script>

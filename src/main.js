@@ -37,7 +37,5 @@ fileUploadControl.onchange = () => {
     const file = res[0]
     console.log(res.length);
     console.log(res, file);
-
-
   })
 }

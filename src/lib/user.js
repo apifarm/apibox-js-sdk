@@ -229,7 +229,7 @@ const user = class user extends query {
         success: function () {
           let c = that.current()
           if (c === null) {
-            const e = '登陆错误，请在Bmob后台填写小程序AppSecret。'
+            const e = '登陆错误，请在 Apibox 后台填写小程序AppSecret。'
             reject(e)
           }
           resolve(c)

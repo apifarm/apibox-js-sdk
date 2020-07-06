@@ -1,4 +1,4 @@
-export interface BmobPromise<T = any> extends Promise<BmobPromise<T>> {
+export interface ApiboxPromise<T = any> extends Promise<ApiboxPromise<T>> {
 }
 
 export interface queryData {
@@ -7,12 +7,12 @@ export interface queryData {
 
 export class Query {
   new(params: string): void;
-  get: (objectId: string) => BmobPromise;
-  set: (filedName: string, filedValue: string) => BmobPromise;
-  destroy: (objectId: string) => BmobPromise;
-  save: (parmas?: object) => BmobPromise;
-  find: () => BmobPromise;
-  current: () => BmobPromise;
+  get: (objectId: string) => ApiboxPromise;
+  set: (filedName: string, filedValue: string) => ApiboxPromise;
+  destroy: (objectId: string) => ApiboxPromise;
+  save: (parmas?: object) => ApiboxPromise;
+  find: () => ApiboxPromise;
+  current: () => ApiboxPromise;
   add: (key: string, val: string[]) => void;
   addUnique: () => (key: string, val: string[]) => void;
   remove: (key: string, val: string[]) => void;
@@ -28,31 +28,31 @@ export class Query {
   skip: (params: number) => void;
   order: (...args: string[]) => void;
   include: (...args: string[]) => void;
-  count: (limit?: number) => BmobPromise;
+  count: (limit?: number) => ApiboxPromise;
   statTo: (key: string, val: any) => object;
-  saveAll: (items: any[]) => BmobPromise;
-  updateStorage: (objectId: string) => BmobPromise;
+  saveAll: (items: any[]) => ApiboxPromise;
+  updateStorage: (objectId: string) => ApiboxPromise;
   field: (key: string, objectId: string) => object;
   withinKilometers: (field: string, coordinates: string, km?: number) => object
   withinGeoBox: (field: string, coordinates: string, s?: number) => object
-  relation: (tableName: string) => BmobPromise
+  relation: (tableName: string) => ApiboxPromise
 }
 
 export class User extends Query {
   new(): void;
-  login: (username: string, password: string) => BmobPromise;
-  register: (params: object) => BmobPromise;
-  signOrLoginByMobilePhone: (phone: number, smsCode: number) => BmobPromise;
+  login: (username: string, password: string) => ApiboxPromise;
+  register: (params: object) => ApiboxPromise;
+  signOrLoginByMobilePhone: (phone: number, smsCode: number) => ApiboxPromise;
   logout: () => void;
-  users: () => BmobPromise;
-  decryption: (params: object) => BmobPromise
-  requestOpenId: (code: any, params?: string) => BmobPromise
-  requestEmailVerify: (email: string) => BmobPromise
-  linkWith: (params: any) => BmobPromise
-  loginWithWeapp: (code: any, params?: string, str: string) => BmobPromise
-  upInfo: (params: object) => BmobPromise
+  users: () => ApiboxPromise;
+  decryption: (params: object) => ApiboxPromise
+  requestOpenId: (code: any, params?: string) => ApiboxPromise
+  requestEmailVerify: (email: string) => ApiboxPromise
+  linkWith: (params: any) => ApiboxPromise
+  loginWithWeapp: (code: any, params?: string, str: string) => ApiboxPromise
+  upInfo: (params: object) => ApiboxPromise
   openId: () => void;
-  auth: (params?: string) => BmobPromise
+  auth: (params?: string) => ApiboxPromise
 }
 
 export interface operation {
@@ -70,11 +70,11 @@ export class Pointer {
 }
 
 export interface functions {
-  (funName: string, parmas?: object): BmobPromise
+  (funName: string, parmas?: object): ApiboxPromise
 }
 
 export class Pay {
-  new(price: string, productName: string, body: any): BmobPromise
+  new(price: string, productName: string, body: any): ApiboxPromise
 }
 
 export class Socket {
@@ -95,8 +95,8 @@ export class Socket {
 
 export class File {
   new(name: string, params: any): void;
-  save: () => BmobPromise;
-  destroy: (params: string) => BmobPromise;
+  save: () => ApiboxPromise;
+  destroy: (params: string) => ApiboxPromise;
 }
 
 
@@ -104,27 +104,27 @@ export interface Apibox {
   initialize: (secretKey: string, securityCode: string, masterKey?: string) => void;
   User: User;
   Query: (params: string) => Query;
-  push: (params: object) => BmobPromise;
+  push: (params: object) => ApiboxPromise;
   Pointer: (parmas: string) => Pointer;
   Relation: (parmas: string) => Relation;
-  requestPasswordReset: (email: object) => BmobPromise;
-  resetPasswordBySmsCode: (smsCode: string, params: object) => BmobPromise;
-  updateUserPassword: (objectId: string, params: object) => BmobPromise;
-  timestamp: () => BmobPromise;
-  generateCode: (params: object) => BmobPromise;
-  getAccessToken: () => BmobPromise;
-  sendWeAppMessage: (parmas: object) => BmobPromise;
-  refund: (parmas: object) => BmobPromise;
-  notifyMsg: (parmas: object) => BmobPromise;
-  requestPasswordReset: (parmas: object) => BmobPromise;
-  checkMsg: (parmas: string) => BmobPromise;
+  requestPasswordReset: (email: object) => ApiboxPromise;
+  resetPasswordBySmsCode: (smsCode: string, params: object) => ApiboxPromise;
+  updateUserPassword: (objectId: string, params: object) => ApiboxPromise;
+  timestamp: () => ApiboxPromise;
+  generateCode: (params: object) => ApiboxPromise;
+  getAccessToken: () => ApiboxPromise;
+  sendWeAppMessage: (parmas: object) => ApiboxPromise;
+  refund: (parmas: object) => ApiboxPromise;
+  notifyMsg: (parmas: object) => ApiboxPromise;
+  requestPasswordReset: (parmas: object) => ApiboxPromise;
+  checkMsg: (parmas: string) => ApiboxPromise;
   functions: functions;
   run: functions;
   pay: Pay;
   Socket: (id: string) => Socket;
   geoPoint: (parmas: object) => object;
-  requestSmsCode: (parmas: object, options?: any) => BmobPromise;
-  verifySmsCode: (smscode: string, parmas: object, options?: any) => BmobPromise;
+  requestSmsCode: (parmas: object, options?: any) => ApiboxPromise;
+  verifySmsCode: (smscode: string, parmas: object, options?: any) => ApiboxPromise;
   File: (name: string, object: any) => File
 }
 

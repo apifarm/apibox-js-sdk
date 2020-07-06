@@ -429,9 +429,9 @@ Eamil密码重置
 
 1.用户输入他们的电子邮件，请求重置自己的密码。
 
-2.Bmob向他们的邮箱发送一封包含特殊的密码重置连接的电子邮件，此邮件的模板可在Bmob后台中修改。
+2.apibox 向他们的邮箱发送一封包含特殊的密码重置连接的电子邮件，此邮件的模板可在 apibox 后台中修改。
 
-3.用户根据向导点击重置密码连接，打开一个特殊的Bmob页面，输入一个新的密码。
+3.用户根据向导点击重置密码连接，打开一个特殊的 apibox 页面，输入一个新的密码。
 
 4.用户的密码已被重置为新输入的密码。
 
@@ -657,7 +657,7 @@ query.get('objectId').then(res => {
  方式一：
  const query = Apibox.Query('tableName');
  query.set('id', 'objectId') //需要修改的objectId
- query.set('nickName', 'Bmob后端云')
+ query.set('nickName', 'Apibox后端云')
  query.save().then(res => {
  console.log(res)
  }).catch(err => {
@@ -843,7 +843,7 @@ query.get('ObjectId').then(res => {
 
 ##原子计数器
 
-许多应用都需要维持一些计数器数据，譬如用来跟踪心情被点赞数目等等。Bmob提供了便捷的方式来对任何数字字段进行原子性的增加或者减少：
+许多应用都需要维持一些计数器数据，譬如用来跟踪心情被点赞数目等等。Apibox 提供了便捷的方式来对任何数字字段进行原子性的增加或者减少：
 
  **参数说明：**
 
@@ -1051,8 +1051,8 @@ query.find().then(res => {
 ```
 const query = Apibox.Query('tableName');
 query.find().then(todos => {
-  todos.set('aab', "Bmob后端云");
-  todos.set('bb', 'Bmob后端云');
+  todos.set('aab', "Apibox后端云");
+  todos.set('bb', 'Apibox后端云');
   todos.saveAll().then(res => {
     // 成功批量修改
     console.log(res,'ok')
@@ -1318,9 +1318,9 @@ query.relation('_User').then(res => {
 ```
 
 ## 数据类型
-**Bmob后端云**有很多常见的数据类型，在查询、添加数据库的时候，经常需要了解数据类型结构。
+**Apibox后端云**有很多常见的数据类型，在查询、添加数据库的时候，经常需要了解数据类型结构。
 
-到现在为止我们只使用了可以被标准**JSON**编码的值，Bmob移动客户端SDK库同样支持日期,地理位置数据和指针数据、关系型数据。在REST API中，这些值都被编码了，同时有一个**"__type"**字段来标识出它们所属的类型，所以如果你采用正确的编码的话就可以读或者写这些字段了。
+到现在为止我们只使用了可以被标准**JSON**编码的值，Apibox移动客户端SDK库同样支持日期,地理位置数据和指针数据、关系型数据。在REST API中，这些值都被编码了，同时有一个**"__type"**字段来标识出它们所属的类型，所以如果你采用正确的编码的话就可以读或者写这些字段了。
 
 ### **Date**类型
 
@@ -1356,7 +1356,7 @@ File类型是在上传后返回的JSON数据再加一个Key为"__Type":"File", �
 
 
 ## 统计相关的查询
-Bmob的统计查询，提供以下关键字或其组合的查询操作：
+Apibox的统计查询，提供以下关键字或其组合的查询操作：
 
 | Key        | Operation |
 | :----:  | :----:  |
@@ -1369,13 +1369,13 @@ Bmob的统计查询，提供以下关键字或其组合的查询操作：
 | having     | 分组中的过滤条件 |
 
 
-为避免和用户创建的列名称冲突，Bmob约定以上统计关键字（sum, max, min)的查询结果值都用 `_(关键字)+首字母大写的列名` 的格式，如计算玩家得分列名称为score总和的操作，则返回的结果集会有一个列名为_sumScore。average返回的列为 `_avg+首字母大写的列名` ，有groupcount的情形下则返回_count。
+为避免和用户创建的列名称冲突，Apibox约定以上统计关键字（sum, max, min)的查询结果值都用 `_(关键字)+首字母大写的列名` 的格式，如计算玩家得分列名称为score总和的操作，则返回的结果集会有一个列名为_sumScore。average返回的列为 `_avg+首字母大写的列名` ，有groupcount的情形下则返回_count。
 
 以上关键字除了groupcount是传Boolean值true或false，having传的是和where类似的json字符串，但having只应该用于过滤分组查询得到的结果集，即having只应该包含结果集中的列名如 `{"_sumScore":{"$gt":100}}` ，其他关键字必须是字符串而必须是表中包含的列名，多个列名用,分隔。
 
 以上关键字可以自由组合并可以与前面查询语句中的where, order, limit, skip等组合使用。
 
-比如，GameScore表是游戏玩家的信息和得分表，有playerName(玩家名称)、score(玩家得分)等你自己创建的列，还有Bmob的默认列objectId, createdAt, updatedAt,那么我们现在举例如何使用以上的查询关键字来作这个表的统计。 
+比如，GameScore表是游戏玩家的信息和得分表，有playerName(玩家名称)、score(玩家得分)等你自己创建的列，还有 Apibox 的默认列objectId, createdAt, updatedAt,那么我们现在举例如何使用以上的查询关键字来作这个表的统计。 
 
 ### 计算总和
 我们要计算GameScore表所有玩家的得分总和，sum后面只能拼接Number类型的列名，即要计算哪个列的值的总和，只对Number类型有效，多个Number列用,分隔，则查询如下：
@@ -1656,7 +1656,7 @@ Apibox.functions(params.funcName,params.data).then(function (response) {
       //获取SDK客户端上传的name参数
       var name = request.body.name;
 	  if(name == 'apibox')
-	    response.end('欢迎使用Bmob');
+	    response.end('欢迎使用Apibox');
 	  else
 	    response.end('输入错误，请重新输入');
     }  
@@ -1667,7 +1667,7 @@ Apibox.functions(params.funcName,params.data).then(function (response) {
 
 ```
 {
-	result: "欢迎使用Bmob"
+	result: "欢迎使用Apibox"
 }
 
 ```
@@ -1756,7 +1756,7 @@ res.set('files',res[0])
 
 ### file对象关联
 
-上传文件写入Bmob File字段，上面选择了2张图片，所以返回2个File对象，如果需要写到数据库，字段，一个File字段只能写入一张图，例如下面这样
+上传文件写入Apibox File字段，上面选择了2张图片，所以返回2个File对象，如果需要写到数据库，字段，一个File字段只能写入一张图，例如下面这样
 ```
 const file = ["{"cdn":"upyun","filename":"abc.jpg","url":"http://…2018/05/07/e65172f540195fe880043cc74236e397.jpg"}", "{"cdn":"upyun","filename":"abc.jpg","url":"http://…2018/05/07/5670bf6740385bca802f9c33beb69ab9.jpg"}"]
 query.set('files',file[0])
@@ -1835,15 +1835,15 @@ del.destroy(val).then(res => {
 ## 微信/QQ小程序操作 ##
 ### 授权操作
 
-如小程序使用微信登陆、生成二维码、支付等需要微信的操作，请在Bmob授权后使用。
+如小程序使用微信登陆、生成二维码、支付等需要微信的操作，请在Apibox授权后使用。
 
-登陆Bmob控制台->应用设置->应用配置
+登陆Apibox控制台->应用设置->应用配置
 
 > 如小程序只是操作数据库，不关联微信用户，无需授权即可使用。
 
 ### 域名配置
 
-登陆Bmob控制台->应用设置->应用配置，把显示的域名填写到微信小程序平台
+登陆Apibox控制台->应用设置->应用配置，把显示的域名填写到微信小程序平台
 
 ### 小程序一键登录
 
@@ -2165,7 +2165,7 @@ upload:function(){
 
 **简介：**
 
-微信access_token，业务场景,当其他平台需要使用你小程序的token，并不想与Bmob的平台冲突，可以通过此API实现
+微信access_token，业务场景,当其他平台需要使用你小程序的token，并不想与Apibox的平台冲突，可以通过此API实现
 
 **参数说明：**
 
@@ -2222,7 +2222,7 @@ upload:function(){
     	    	"value": "2018年04月18日 16:30"
     	    },
     	    "keyword3": {
-    	    	"value": "Bmob科技"
+    	    	"value": "Apibox科技"
     	    }
     	}
     	,"emphasis_keyword": ""
@@ -2255,7 +2255,7 @@ upload:function(){
 
 1. 需企业用户微信支付提前开通付款到零钱功能
 
-2. 填写支付商户密匙到Bmob控制台
+2. 填写支付商户密匙到Apibox控制台
 
    
 
@@ -2272,8 +2272,8 @@ upload:function(){
 **使用条件：**
 
 1. 需企业用户提前开通微信支付
-2. 填写支付商户id到Bmob控制台
-3. 开通Bmob专业版或以上版本（可开通试用，工单联系）
+2. 填写支付商户id到 apibox 控制台
+3. 开通 apibox 专业版或以上版本（可开通试用，工单联系）
 
 
 
@@ -2460,7 +2460,7 @@ wx.getWeRunData({
 
 **注意事项：**
 
-此模板是Bmob 云提供，不可使用自己`template_id`，`openid`在Bmob后端云服务号回复`openid`拿到。
+此模板是 Apibox 云提供，不可使用自己`template_id`，`openid`在 Apibox 后端云服务号回复`openid`拿到。
 
 **参数说明：**
 
@@ -2565,7 +2565,7 @@ wx.getWeRunData({
 
 ### 小程序客服消息
 
-经常有人有需求，希望手机端回复客户消息。这时，可以基于微信客服接口函数使用云函数开发相关功能， 如果你不想开发，希望自己小程序直接可用客服消息，可以使用Bmob官方提供的服务消息解决方案，主动提醒、自动回复、手机一键处理客服。如需使用请应用升级页面操作
+经常有人有需求，希望手机端回复客户消息。这时，可以基于微信客服接口函数使用云函数开发相关功能， 如果你不想开发，希望自己小程序直接可用客服消息，可以使用 Apibox 官方提供的服务消息解决方案，主动提醒、自动回复、手机一键处理客服。如需使用请应用升级页面操作
 
 
 
@@ -2579,7 +2579,7 @@ wx.getWeRunData({
 
 
 
-Bmob提供了数据实时功能，当开发者监听某个变化事件，例如监听表更新时，表的内容一旦变化，服务器就会通知SDK，SDK提供了相应回调函数来给开发者使用。当然开发者也可以取消相对应的监听，这样就不会收到数据变化的消息了。
+Apibox 提供了数据实时功能，当开发者监听某个变化事件，例如监听表更新时，表的内容一旦变化，服务器就会通知SDK，SDK提供了相应回调函数来给开发者使用。当然开发者也可以取消相对应的监听，这样就不会收到数据变化的消息了。
 
 
 
@@ -2588,7 +2588,7 @@ Bmob提供了数据实时功能，当开发者监听某个变化事件，例如�
 对实时数据对象进行初始化
 
 ```
-let BmobSocketIo =new Apibox.Socket()
+let ApiboxSocketIo =new Apibox.Socket()
 ```
 
 ### 订阅事件
@@ -2598,7 +2598,7 @@ let BmobSocketIo =new Apibox.Socket()
 订阅表"GameScore"更新的事件。
 
 ```
-BmobSocketIo.updateTable("GameScore");
+ApiboxSocketIo.updateTable("GameScore");
 ```
 
 #### 订阅行更新的事件
@@ -2606,7 +2606,7 @@ BmobSocketIo.updateTable("GameScore");
 订阅表"GameScore"中行objectId为"3342e40e4f"更新的事件。
 
 ```
-BmobSocketIo.updateRow("GameScore","3342e40e4f");
+ApiboxSocketIo.updateRow("GameScore","3342e40e4f");
 
 ```
 
@@ -2615,7 +2615,7 @@ BmobSocketIo.updateRow("GameScore","3342e40e4f");
 订阅表"GameScore"中行objectId为"3342e40e4f"删除的事件。
 
 ```
-BmobSocketIo.deleteRow("GameScore","1256e40e4f");
+ApiboxSocketIo.deleteRow("GameScore","1256e40e4f");
 
 ```
 
@@ -2626,7 +2626,7 @@ BmobSocketIo.deleteRow("GameScore","1256e40e4f");
 取消订阅表"GameScore"更新的事件。
 
 ```
-BmobSocketIo.unsubUpdateTable("GameScore");
+ApiboxSocketIo.unsubUpdateTable("GameScore");
 
 ```
 
@@ -2635,7 +2635,7 @@ BmobSocketIo.unsubUpdateTable("GameScore");
 取消订阅表"GameScore"中objectId为"3342e40e4f"行更新的事件。
 
 ```
-BmobSocketIo.unsubUpdateRow("GameScore","3342e40e4f");
+ApiboxSocketIo.unsubUpdateRow("GameScore","3342e40e4f");
 
 ```
 
@@ -2644,7 +2644,7 @@ BmobSocketIo.unsubUpdateRow("GameScore","3342e40e4f");
 取消订阅表"GameScore"中objectId为"3342e40e4f"行删除的事件。
 
 ```
-BmobSocketIo.unsubDeleteRow("GameScore","1256e40e4f");
+ApiboxSocketIo.unsubDeleteRow("GameScore","1256e40e4f");
 
 ```
 
@@ -2657,7 +2657,7 @@ BmobSocketIo.unsubDeleteRow("GameScore","1256e40e4f");
 tablename为更新的表，data为服务端返回的更新数据。
 
 ```
-   BmobSocketIo.onUpdateTable = function(tablename,data) {    
+   ApiboxSocketIo.onUpdateTable = function(tablename,data) {    
       //业务逻辑的代码
    };
 
@@ -2668,7 +2668,7 @@ tablename为更新的表，data为服务端返回的更新数据。
 tablename为更新的表，objectId为更新行的objectId，data为服务端返回的更新数据。
 
 ```
-   BmobSocketIo.onUpdateRow = function(tablename,objectId,data) {    
+   ApiboxSocketIo.onUpdateRow = function(tablename,objectId,data) {    
       //业务逻辑的代码
    };
 
@@ -2679,7 +2679,7 @@ tablename为更新的表，objectId为更新行的objectId，data为服务端返
 tablename为更新的表，objectId为更新行的objectId，data为服务端返回的更新数据。
 
 ```
-   BmobSocketIo.onDeleteRow = function(tablename,objectId,data) {    
+   ApiboxSocketIo.onDeleteRow = function(tablename,objectId,data) {    
       //业务逻辑的代码
    };
 
